@@ -9,15 +9,19 @@ class TripListOptions extends React.Component {
     if(checked) {
       console.log('Adding tag', tag);
       // TODO - use action dispatcher from props
+      this.props.addTagPhrase(tag);
+
     } else {
       console.log('Removing tag', tag);
       // TODO - use action dispatcher from props
+      this.props.removeTagPhrase(tag);
     }
   }
 
   handleDuration(type, value){
     console.log('Changing duration', type, value);
     // TODO - use action dispatcher from props
+    this.props.changeFilter({type, value});
   }
 
   handleSearch(phrase){
@@ -73,6 +77,9 @@ TripListOptions.propTypes = {
   tags: PropTypes.object,
   filters: PropTypes.object,
   changeSearchPhrase: PropTypes.func,
+  addTagPhrase: PropTypes.func,
+  changeFilter: PropTypes.func,
+  removeTagPhrase: PropTypes.func,
 };
 
 export default TripListOptions;
