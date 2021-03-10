@@ -1,10 +1,15 @@
-.switchWrapper {
-    position: relative;
+.switchAnimation {
+  position: relative;
   
-    > :first-child ~ * {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-    }
+  @keyframes myMove {
+  from {top: 200px;}
+  to {top: 0px;}
+  }
+  > :first-child ~ * {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  animation: myMove 1.2s ;
+  }
   }
