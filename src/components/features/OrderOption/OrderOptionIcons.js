@@ -16,6 +16,7 @@ const OrderOptionIcons = ({values, setOptionValue, required }) => (
         : ''
       }
     </div> 
+    
     {values.map(value => (
       < div
         className={styles.icon}
