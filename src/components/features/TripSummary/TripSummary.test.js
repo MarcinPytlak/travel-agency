@@ -55,8 +55,9 @@ describe('Component TripSummary', () => {
   it('should generate div tags', () => {
     // eslint-disable-next-line no-unused-vars
     const component = shallow(<TripSummary tags={['tag1', 'tag2', 'tag3']} id={'link'} days={123} cost={'expectedCost'} image={'expectedImage'} name='Lorem ipsum' />);
-    const tags=[];
+    const tags=['tag1', 'tag2', 'tag3'];
     expect(tags).toBeDefined();
-    expect(tags.length > 1);
+    expect(tags.length < 0);
+    expect(tags).not.toBeNull();
   });
 });
