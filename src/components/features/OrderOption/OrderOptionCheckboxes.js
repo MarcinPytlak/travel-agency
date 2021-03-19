@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import {formatPrice} from '../../../utils/formatPrice';
 
 const newValueSet = (currentValue, id, checked) => {
-  console.log(currentValue, 'id:', id);
   if(checked){
     return [
       ...currentValue,

@@ -138,10 +138,12 @@ for(let type in optionTypes){
           expect(options.at(1).prop('value')).toBe(mockProps.values[1].id);
         });
         it('should run setOrderOption function on change', () => {
-        //   renderedSubcomponent.find('label').find('input').prop('value' == testValue).simulate('change', {currentTarget: {checked: true}});
-          console.log(renderedSubcomponent.find('input').debug());
-          //   expect(mockSetOrderOption).toBeCalledTimes(1);
-        //   expect(mockSetOrderOption).toBeCalledWith({ [mockProps.id]: [mockProps.currentValue, testValue]});
+          const change = renderedSubcomponent.find('input');
+          const argument = change.find({value:testValue});
+          argument.simulate('change', {currentTarget: {checked: true}});
+          
+          expect(mockSetOrderOption).toBeCalledTimes(1);
+          expect(mockSetOrderOption).toBeCalledWith({ [mockProps.id]: [mockProps.currentValue, testValue]});
         });
         break; 
       }
