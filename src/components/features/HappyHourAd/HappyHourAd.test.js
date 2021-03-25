@@ -47,7 +47,7 @@ const mockDate = customDate => class extends Date {
 
 const checkDescriptionAtTime = (time, expectedDescription) => {
   it(`should show correct at ${time}`, () => {
-    global.Date = mockDate(`2019-05-14T${time}.135Z`);
+    global.Date = mockDate(`2020-03-25T${time}.135Z`);
   
     const component = shallow(<HappyHourAd {...mockProps} />);
     const renderedTime = component.find(select.promoDescription).text();
@@ -66,7 +66,7 @@ describe('Component HappyHourAd with mocked Date', () => {
 const checkDescriptionAfterTime = (time, delaySeconds, expectedDescription) => {
   it(`should show correct value ${delaySeconds} seconds after ${time}`, () => {
     jest.useFakeTimers();
-    global.Date = mockDate(`2019-05-14T${time}.135Z`);
+    global.Date = mockDate(`2020-03-25T${time}.135Z`);
     
     const component = shallow(<HappyHourAd {...mockProps} />);
     const newTime = new Date();
@@ -81,8 +81,19 @@ const checkDescriptionAfterTime = (time, delaySeconds, expectedDescription) => {
     jest.useRealTimers();
   });
 };
-describe('Component HappyHourAd with fake Date', () => {
-  checkDescriptionAfterTime('11:57:58', 2, '122');
-  checkDescriptionAfterTime('11:59:59', 1,  '1');
-  checkDescriptionAfterTime('13:00:00',60 * 60, 23 * 60 * 60 + '');
+describe('Component HappyHourAd with mocked Date and delay', () => {
+  checkDescriptionAfterTime('11:57:58', 2, '120');
+  checkDescriptionAfterTime('11:59:58', 1, '1');
+  checkDescriptionAfterTime('13:00:00', 60 * 60, 22 * 60 * 60 + '');
+});
+
+describe('Component HappyHourAd with promo description', () => {
+  checkDescriptionAtTime('12:00:00', mockProps.promoDescription);
+  checkDescriptionAtTime('12:30:30', mockProps.promoDescription);
+  checkDescriptionAtTime('12:59:59', mockProps.promoDescription);
+});
+describe('Component HappyHourAd with mocked Date and when test start before promotion', () => {
+  checkDescriptionAfterTime('11:57:58', 123, mockProps.promoDescription);
+  checkDescriptionAfterTime('11:59:52', 9, mockProps.promoDescription);
+  checkDescriptionAfterTime('10:00:00', 2 * 60 * 60, mockProps.promoDescription);
 });
